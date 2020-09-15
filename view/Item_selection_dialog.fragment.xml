@@ -1,0 +1,58 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="item_selection_dialog_id"
+		title="Eşya Seçiniz">
+		<content>
+			<Bar>
+				<contentLeft>
+					<Input
+						id="item_quantity_input_id"
+						name="item_quantity_text"
+						type="Number"
+						valueLiveUpdate="true"
+						placeholder="Miktar Giriniz"
+						enabled="false"
+						liveChange="enableItemSelectionDialogOkButton"
+						submit="closeItemSelectionDialogOk"/>
+				</contentLeft>
+				<contentRight>
+					<Select
+						id="item_unit_selection_id">
+						<core:Item text="kilo"/>
+						<core:Item text="ton"/>
+					</Select>
+				</contentRight>
+			</Bar>
+		</content>
+		<content>
+			<SelectList
+				id="item_list_id"
+				items="{fragmentModel>/eşyalar}"
+				selectionChange="onSelectItem">
+				<items>
+					<core:Item
+						key="{fragmentModel>id}"
+						text="{fragmentModel>İçerik}"/>
+				</items>
+			</SelectList>
+		</content>
+		<beginButton>
+			<Button
+				id="item_selection_ok_button_id"
+				type="Accept"
+				iconFirst="false"
+				text="Ekle"
+				press="closeItemSelectionDialogOk"
+				enabled="false"/>
+		</beginButton>
+		<endButton>
+			<Button
+				id="item_selection_cancel_button_id"
+				type="Reject"
+				text="İptal"
+				press="closeItemSelectionDialogCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,365 @@
+<mvc:View controllerName="TCDD_v3.controller.View2"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:f="sap.f"
+	xmlns:card="sap.f.cards"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<SplitApp id="SplitAppDemo" initialDetail="bosSayfa" initialMaster="master" orientationChange=".onOrientationChange">
+		<detailPages>
+			<Page id="bosSayfa" title="Giriş Sayfası" class="sapUiStdPage" backgroundDesign="Transparent" showNavButton="false" navButtonPress=".onPressDetailBack">
+				<content alignItems="Center">
+					<FlexBox alignItems="Center" justifyContent="Center">
+						<items>
+							<Label text="Sol taraftaki menüden işlemleri gerçekleştirebilirsiniz." design="Bold" class="myContent2"></Label>
+						</items>
+					</FlexBox>
+				</content>
+			</Page>
+			<Page title="Vagon Talep Detayı" id="talepDetay" class="sapUiContentPadding sapUiResponsivePadding--header sapUiResponsivePadding--subHeader sapUiResponsivePadding sapUiResponsivePadding--footer" showNavButton="false">
+				<ObjectHeader id="oh1" responsive="true" title="{talep>/Şirketİsmi}" backgroundDesign="Transparent" binding="{talep}" icon="sap-icon://cargo-train">
+					<attributes>
+						<ObjectAttribute title="TalepNo" text="{talep>/TalepNo}"/>
+						<ObjectAttribute title="Çıkış İstasyonu" text="{path: 'talep>/İstasyonlar/Çıkış', formatter: '.formatter.capitalizeText'}"/>
+						<ObjectAttribute title="Varış İstasyonu" text="{path: 'talep>/İstasyonlar/Varış', formatter: '.formatter.capitalizeText'}"/>
+						<ObjectAttribute title="Teslim Tarihi" text="{ path: 'talep>/TeslimTarihi', formatter: '.formatter.formatDate' }"/>
+						<ObjectAttribute title="Taşıma Türü" text="{path: 'talep>/TaşımaTürü', formatter: '.formatter.capitalizeText'}"/>
+						<!-- <ObjectAttribute title="Mesafe" text="537 KM" /> -->
+					</attributes>
+					<statuses>
+						<ObjectStatus title="Talep Durumu" text="{path: 'talep>/TalepDurumu', formatter: '.formatter.capitalizeText'}" state="{= ${talep>/TalepDurumu} === 'onaylandı' ? 'Success' : 'Warning'}"/>
+					</statuses>
+				</ObjectHeader>
+				<content>
+					<VBox alignItems="Center">
+						<Label text="Kalem Numarası" labelFor="combo" design="Bold" class="sapUiMediumMarginTop"/>
+						<Select id="combo" class="sapUiMediumMarginBottom" items="{ path: 'talep>/VagonBilgi', sorter: { path: 'KalemNo' } }" autoAdjustWidth="false" change=".onSelectionChange">
+							<core:Item key="{talep>KalemNo}" text="{talep>KalemNo}"/>
+						</Select>
+					</VBox>
+					<VBox width="100%" direction="Row" justifyContent="SpaceBetween">
+						<VBox width="49.5%">
+							<List id="genelBilgiListesi1">
+								<headerToolbar>
+									<OverflowToolbar>
+										<ToolbarSpacer/>
+										<Title text="Genel Bilgi" level="H2"/>
+										<ToolbarSpacer/>
+									</OverflowToolbar>
+								</headerToolbar>
+								<items>
+									<StandardListItem title="Vagon Tipi" info="{seçiliKalem>/VagonTipi}"/>
+									<StandardListItem title="Vagon Sayısı" info="{seçiliKalem>/VagonSayısı}"/>
+									<StandardListItem title="Toplam Yük" info="{seçiliKalem>/ToplamYük}"/>
+									<StandardListItem title="Yük Birimi" info="{path: 'seçiliKalem>/YükBirimi', formatter: '.formatter.capitalizeText'}"/>
+								</items>
+							</List>
+						</VBox>
+						<VBox width="49.5%">
+							<List id="genelBilgiListesii1">
+								<headerToolbar>
+									<OverflowToolbar>
+										<ToolbarSpacer/>
+										<Title text="Ek Bilgiler" level="H2"/>
+										<ToolbarSpacer/>
+									</OverflowToolbar>
+								</headerToolbar>
+								<items>
+									<StandardListItem title="Kıymet Alma" info="{path: 'seçiliKalem>/KıymetAlma', formatter: '.formatter.formatBool'}"/>
+									<StandardListItem title="Kredili Taşıma" info="{path: 'seçiliKalem>/KrediliTaşıma', formatter: '.formatter.formatBool'}"/>
+									<StandardListItem title="Cari Hesap" info="{path: 'seçiliKalem>/CariHesap', formatter: '.formatter.formatBool'}"/>
+									<StandardListItem title="Mesafe" info="357"/>
+								</items>
+							</List>
+						</VBox>
+					</VBox>
+					<!-- EŞYA LİSTESİ -->
+					<VBox class="sapUiSmallMargin">
+						<Table id="esyalarTablosu" items="{seçiliKalem>/Eşyalar}" growing="true" growingThreshold="10">
+							<headerToolbar>
+								<OverflowToolbar>
+									<content>
+										<ToolbarSpacer/>
+										<Title text="Eşyalar" level="H2"/>
+										<ToolbarSpacer/>
+									</content>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns>
+								<Column hAlign="Center">
+									<Label text="Eşya Tipi" design="Bold"/>
+								</Column>
+								<Column hAlign="Center">
+									<Label text="Miktar" design="Bold"/>
+								</Column>
+								<Column hAlign="Center">
+									<Label text="Birim" design="Bold"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{path: 'seçiliKalem>Eşyaİsmi', formatter: '.formatter.capitalizeText'}"/>
+										<Text text="{seçiliKalem>EşyaMiktarı}"/>
+										<Text text="{path: 'seçiliKalem>EşyaBirimi', formatter: '.formatter.capitalizeText'}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</VBox>
+				</content>
+				<footer>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button text="Talebi Düzenle" type="Accept"/>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+			<Page id="yeniVagon" title="Yeni Vagon Talebi" class="sapUiStdPage" backgroundDesign="Transparent" showNavButton="false" navButtonPress=".onPressDetailBack">
+				<content>
+					<Toolbar class="myToolBar">
+						<core:Icon src="sap-icon://cargo-train" size="3rem" class="sapUiSmallMargin"/>
+						<Title text="Vagon Talebi" class="myTitle"/>
+						<ToolbarSpacer>
+						</ToolbarSpacer>
+						<ObjectIdentifier title="1" text="Kalem No" id="el22"/>
+					</Toolbar>
+				</content>
+				<content>
+					<VBox class="myContent">
+						<HBox>
+							<Label text="Vagon Talep No:" class="myPadding"/>
+							<Label id="el1" text="Belirleniyor." width="200px" class="myPadding3"></Label>
+						</HBox>
+						<HBox>
+							<Label text="Kalem Numarası:" class="myPadding"/>
+							<Label id="el2" text="1" width="200px" class="myPadding3"></Label>
+						</HBox>
+						<HBox alignItems="Center">
+							<Label text="Vagon Tipi:" class="myPadding"/>
+							<Select id="el4" items="{ path: 'dataModel2>/vagonlar'}" class="myPadding4">
+								<core:Item key="{key}" text="{dataModel2>Tip}"/>
+							</Select>
+						</HBox>
+						<HBox alignItems="Center">
+							<Label text="Talep Edilen Tarih:" class="myPadding"/>
+							<DatePicker id="el5" value="" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/y" change="handleChange" class="myPadding4"/>
+						</HBox>
+						<HBox alignItems="Center">
+							<Label text="Vagon Adedi:" class="myPadding"/>
+							<Input id="el6" placeholder="Vagon adedini giriniz." type="Number" class="myPadding4" liveChange=".onChangeVagonAdet"></Input>
+							<Label id="vagonAdetHataMesaji" text="" class="sapUiSmallMarginBegin"/>
+						</HBox>
+						<HBox alignItems="Center">
+							<Label text="Teslimat Tipi:" class="myPadding"/>
+							<Select class="myPadding4" change="onTeslimatTipiSelect" id="el9" forceSelection="false">
+								<core:Item text="Yurtiçi"/>
+								<core:Item text="Yurtdışı"/>
+							</Select>
+						</HBox>
+						<HBox>
+							<Label text="Kalkış İstasyonu:" class="myPadding"/>
+							<Input id="b2" type="Text" class="myPadding4" placeholder="Çıkış İstasyonu" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="openDepartureSelectionDialog"/>
+						</HBox>
+						<HBox>
+							<Label text="Varış İstasyonu:" class="myPadding"/>
+							<Input id="b3" type="Text" class="myPadding4" placeholder="Varış İstasyonu" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="openArrivalSelectionDialog"/>
+						</HBox>
+						<HBox>
+							<Label text="Müşteri:" class="myPadding"/>
+							<Input id="b1" type="Text" class="myPadding4" placeholder="Müşteri" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="openClientSelectionDialog"/>
+						</HBox>
+						<HBox>
+							<Label text="Para Birimi:" class="myPadding"/>
+							<Select class="myPadding4" id="el12">
+								<core:Item text="TL"/>
+								<core:Item text="EUR"/>
+								<core:Item text="USD"/>
+							</Select>
+						</HBox>
+						<HBox>
+							<Label text="Sipariş Ödeme Türü:" class="myPadding"/>
+							<Select class="myPadding4" id="el14">
+								<core:Item text="Çıkışta Peşin"/>
+								<core:Item text="Çıkışta Kredi Kartı"/>
+							</Select>
+						</HBox>
+						<HBox>
+							<Label text="Kredili Taşıma:" class="myPadding"/>
+							<CheckBox selected="false" class="myPadding4" id="el15"/>
+						</HBox>
+						<HBox>
+							<Label text="Cari Hesap:" class="myPadding"/>
+							<CheckBox selected="false" class="myPadding4" id="el16"/>
+						</HBox>
+						<HBox>
+							<Label text="Kıymet Alma:" class="myPadding"/>
+							<CheckBox selected="false" class="myPadding4" id="el13"/>
+						</HBox>
+					</VBox>
+				</content>
+				<content>
+					<Table id="productTable1" inset="false" items="{ path: 'dataModel3>/'}" growing="true" growingThreshold="10" mode="MultiSelect">
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<Title text="Ürün Ekle" level="H2"/>
+									<ToolbarSpacer/>
+									<Button icon="sap-icon://delete" id="deleteButton" press="onDeleteButtonClick"></Button>
+									<Button icon="sap-icon://add" id="addButton" press="openItemSelectionDialog"></Button>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<infoToolbar>
+						</infoToolbar>
+						<columns>
+							<Column width="12em" hAlign="Center">
+								<Label text="Eşya" design="Bold"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+								<Label text="Miktar" design="Bold"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+								<Label text="Birim" design="Bold"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<ObjectIdentifier title="" text="{path: 'dataModel3>Eşyaİsmi', formatter: '.formatter.capitalizeText'}"/>
+									<Text text="{dataModel3>EşyaMiktarı}"/>
+									<Text text="{path: 'dataModel3>EşyaBirimi', formatter: '.formatter.capitalizeText'}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+				<footer>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://decline" text="İptal" press="onApproveDialogPress2"></Button>
+						<Button icon="sap-icon://accept" text="Vagonu Ekle" press="onApproveDialogPress"></Button>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+			<Page id="yeniKalem" title="Vagon Talep Detayı" backgroundDesign="Transparent" class="sapUiStdPage" showNavButton="false" navButtonPress=".onPressDetailBack">
+				<content>
+					<ObjectHeader id="oh2" responsive="true" title="{sendData>/Şirketİsmi}" backgroundDesign="Transparent" binding="{talep}" icon="sap-icon://cargo-train">
+						<attributes>
+							<ObjectAttribute title="Taşıma Türü" text="{sendData>/TaşımaTürü}"/>
+							<ObjectAttribute title="Çıkış İstasyonu" text="{sendData>/İstasyonlar/Çıkış}"/>
+							<ObjectAttribute title="Teslim Tarihi" text="{ path: 'sendData>/TeslimTarihi', formatter: '.formatter.formatDate' }"/>
+							<ObjectAttribute title="Varış İstasyonu" text="{sendData>/İstasyonlar/Varış}"/>
+							<!-- <ObjectAttribute title="Mesafe" text="537 KM" /> -->
+						</attributes>
+						<statuses>
+							<ObjectStatus title="TalepNo" text="İşleniyor" state="Warning"/>
+							<ObjectStatus title="Onay" text="İşleniyor" state="Warning"/>
+						</statuses>
+					</ObjectHeader>
+					<VBox alignItems="Center">
+						<Label text="Kalem Numarası" labelFor="kalemBox" design="Bold" class="sapUiMediumMarginTop"/>
+						<Select class="sapUiMediumMarginBottom" autoAdjustWidth="false" id="kalemBox" change=".onKalemBoxSelect"></Select>
+					</VBox>
+					<VBox width="100%" direction="Row" justifyContent="SpaceBetween">
+						<VBox width="49.5%">
+							<List id="genelBilgiListesi">
+								<headerToolbar>
+									<OverflowToolbar>
+										<ToolbarSpacer/>
+										<Title text="Genel Bilgi" level="H2"/>
+										<ToolbarSpacer/>
+									</OverflowToolbar>
+								</headerToolbar>
+								<items>
+									<StandardListItem info="{dataModel4>/VagonTipi/}" title="Vagon Tipi"/>
+									<StandardListItem info="{dataModel4>/VagonSayısı/}" title="Vagon Sayısı"/>
+									<StandardListItem title="Toplam Yük" info="{dataModel4>/ToplamYük}"/>
+									<StandardListItem title="Yük Birimi" info="{path: 'dataModel4>/YükBirimi', formatter: '.formatter.capitalizeText'}"/>
+								</items>
+							</List>
+						</VBox>
+						<VBox width="49.5%">
+							<List id="genelBilgiListesii">
+								<headerToolbar>
+									<OverflowToolbar>
+										<ToolbarSpacer/>
+										<Title text="Vagon Bilgisi" level="H2"/>
+										<ToolbarSpacer/>
+									</OverflowToolbar>
+								</headerToolbar>
+								<items>
+									<StandardListItem title="Kıymet Alma" info="{path: 'dataModel4>/KıymetAlma', formatter: '.formatter.formatBool'}"/>
+									<StandardListItem title="Kredili Taşıma" info="{path: 'dataModel4>/KrediliTaşıma', formatter: '.formatter.formatBool'}"/>
+									<StandardListItem title="Cari Hesap" info="{path: 'dataModel4>/CariHesap', formatter: '.formatter.formatBool'}"/>
+									<StandardListItem title="Mesafe" info="300"/>
+								</items>
+							</List>
+						</VBox>
+					</VBox>
+					<Table id="productTable2" inset="false" items="{ path: 'dataModel4>/Eşyalar'}" growing="true" growingThreshold="10">
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<ToolbarSpacer/>
+									<Title text="Eşyalar" level="H2"/>
+									<ToolbarSpacer/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="12em" hAlign="Center">
+								<Label text="İsim" design="Bold"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+								<Label text="Miktar" design="Bold"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+								<Label text="Birim" design="Bold"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<ObjectIdentifier title="" text="{path: 'dataModel4>Eşyaİsmi', formatter: '.formatter.capitalizeText'}"/>
+									<Text text="{path: 'dataModel4>EşyaMiktarı'}"/>
+									<Text text="{path: 'dataModel4>EşyaBirimi', formatter: '.formatter.capitalizeText'}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+				<footer>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://decline" text="Talebi İptal Et" press="onApproveDialogPress4"></Button>
+						<Button icon="sap-icon://create" text="Yeni Kalem" press="onApproveDialogPress5"></Button>
+						<Button icon="sap-icon://accept" text="Talebi Kaydet" press="onApproveDialogPress3"></Button>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</detailPages>
+		<masterPages>
+			<Page id="master2" title="Talepler" backgroundDesign="List" class="sapUiStdPage" navButtonPress=".onPressMasterBack">
+				<List itemPress=".onListItemPress" items="{dataModel>/}" id="masterList" updateFinished="onUpdateFinished">
+					<items>
+						<ObjectListItem id="getTalepNo" title="{dataModel>İstasyonlar/Çıkış}-{dataModel>İstasyonlar/Varış}" type="Active" press="onListItemPress" number="{dataModel>TalepNo}" numberUnit="" custom:to="talepDetay">
+							<firstStatus>
+								<ObjectStatus text="{path: 'dataModel>TalepDurumu', formatter: '.formatter.capitalizeText'}"/>
+							</firstStatus>
+							<ObjectAttribute text="{dataModel>Şirketİsmi}"/>
+							<ObjectAttribute text="{path: 'dataModel>TeslimTarihi' , formatter: '.formatter.formatDate'}"/>
+						</ObjectListItem>
+					</items>
+				</List>
+				<footer>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button id="newCart" icon="sap-icon://add" text="Yeni Vagon" press="onNewCartPress"></Button>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</masterPages>
+	</SplitApp>
+</mvc:View>

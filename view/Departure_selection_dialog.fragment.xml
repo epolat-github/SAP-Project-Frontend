@@ -1,0 +1,29 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="departure_selection_dialog_id"
+		title="Çıkış İstasyonu Seçiniz">
+		<content>
+			<RadioButtonGroup
+				id="departure_selection_radio_button_group_id"
+				select="onSelectDepartureStation">
+			</RadioButtonGroup>
+		</content>
+		<beginButton>
+			<Button
+				id="departure_selection_ok_button_id"
+				type="Accept"
+				text="Seç"
+				iconFirst="false"
+				press="closeDepartureSelectionDialogOk"/>
+		</beginButton>
+		<endButton>
+			<Button
+				id="departure_selection_cancel_button_id"
+				type="Reject"
+				text="İptal"
+				press="closeDepartureSelectionDialogCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

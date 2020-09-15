@@ -1,0 +1,146 @@
+{
+    "Talepler": [
+        {
+            "TalepNo": 10333,
+            "Şirketİsmi": "Comp1",
+            "TalepDurumu": "işleniyor",
+            "TalepTürü": "Ticari Müşteri-1",
+            "İstasyonlar": {
+                "Cikis": "İstasyonA",
+                "Varis": "İstasyonB"
+            },
+            "teslimTarihi": 1595356058588,
+            "TaşımaTürü": "Yurtdışı",
+            "VagonBilgi": [
+                {
+                    "KalemNo": 1,
+                    "VagonTipi": "A",
+                    "VagonSayısı": 2,
+                    "Eşyalar": [
+                        "eşya-1",
+                        "eşya-2",
+                        "eşya-3"
+                    ],
+                    "ToplamYük": 40,
+                    "YükBirimi": "ton"
+                },
+                {
+                    "KalemNo": 2,
+                    "VagonTipi": "E",
+                    "VagonSayısı": 1,
+                    "Eşyalar": [
+                        "eşya-4",
+                        "eşya-5",
+                        "eşya-6"
+                    ],
+                    "ToplamYük": 80,
+                    "YükBirimi": "adet"
+                }
+            ]
+        },
+        {
+            "TalepNo": 10334,
+            "Şirketİsmi": "Comp2",
+            "TalepDurumu": "red",
+            "TalepTürü": "Ticari Müşteri-1",
+            "İstasyonlar": {
+                "Cikis": "İstasyonF",
+                "Varis": "İstasyonK"
+            },
+            "teslimTarihi": 1658428192000,
+            "TaşımaTürü": "Yurtdışı",
+            "VagonBilgi": [
+                {
+                    "KalemNo": 1,
+                    "VagonTipi": "A",
+                    "VagonSayısı": 2,
+                    "Eşyalar": [
+                        "eşya-1",
+                        "eşya-2",
+                        "eşya-3"
+                    ],
+                    "ToplamYük": 40,
+                    "YükBirimi": "ton"
+                }
+            ]
+        },
+        {
+            "TalepNo": 10335,
+            "Şirketİsmi": "Comp3",
+            "TalepDurumu": "kabul",
+            "TalepTürü": "Ticari Müşteri-1",
+            "İstasyonlar": {
+                "Cikis": "İstasyonA",
+                "Varis": "İstasyonB"
+            },
+            "teslimTarihi": 1606855192000,
+            "TaşımaTürü": "Yurtdışı",
+            "VagonBilgi": [
+                {
+                    "KalemNo": 1,
+                    "VagonTipi": "A",
+                    "VagonSayısı": 2,
+                    "Eşyalar": [
+                        "eşya-1",
+                        "eşya-2",
+                        "eşya-3"
+                    ],
+                    "ToplamYük": 40,
+                    "YükBirimi": "ton"
+                }
+            ]
+        },
+        {
+            "TalepNo": 10336,
+            "Şirketİsmi": "Comp4",
+            "TalepDurumu": "işleniyor",
+            "TalepTürü": "Ticari Müşteri-1",
+            "İstasyonlar": {
+                "Cikis": "İstasyonA",
+                "Varis": "İstasyonB"
+            },
+            "teslimTarihi": 1605983392000,
+            "TaşımaTürü": "Yurtiçi",
+            "VagonBilgi": [
+                {
+                    "KalemNo": 1,
+                    "VagonTipi": "A",
+                    "VagonSayısı": 2,
+                    "Eşyalar": [
+                        "eşya-1",
+                        "eşya-2",
+                        "eşya-3"
+                    ],
+                    "ToplamYük": 40,
+                    "YükBirimi": "ton"
+                }
+            ]
+        },
+        {
+            "TalepNo": 10337,
+            "Şirketİsmi": "Comp1",
+            "TalepDurumu": "işleniyor",
+            "TalepTürü": "Ticari Müşteri-1",
+            "İstasyonlar": {
+                "Cikis": "İstasyonA",
+                "Varis": "İstasyonB"
+            },
+            "teslimTarihi": 1600712992000,
+            "TaşımaTürü": "Yurtiçi",
+            "VagonBilgi": [
+                {
+                    "KalemNo": 1,
+                    "VagonTipi": "A",
+                    "VagonSayısı": 2,
+                    "Eşyalar": [
+                        "eşya-1",
+                        "eşya-2",
+                        "eşya-3"
+                    ],
+                    "ToplamYük": 40,
+                    "YükBirimi": "ton"
+                }
+            ]
+        }
+    ]
+}

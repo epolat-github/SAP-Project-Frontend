@@ -1,0 +1,29 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="client_selection_dialog_id"
+		title="Müşteri Seçiniz">
+		<content>
+			<RadioButtonGroup
+				id="client_selection_radio_button_group_id"
+				select="onSelectClient">
+			</RadioButtonGroup>
+		</content>
+		<beginButton>
+			<Button
+				id="client_selection_ok_button_id"
+				type="Accept"
+				text="Seç"
+				iconFirst="false"
+				press="closeClientSelectionDialogOk"/>
+		</beginButton>
+		<endButton>
+			<Button
+				id="client_selection_cancel_button_id"
+				type="Reject"
+				text="iptal"
+				press="closeClientSelectionDialogCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

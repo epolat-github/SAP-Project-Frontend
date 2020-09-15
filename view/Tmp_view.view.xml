@@ -1,0 +1,21 @@
+<mvc:View
+	controllerName="item_selection.tcdd.controller.Tmp_view"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Button
+		id="try"
+		text="try"
+		press="openItemSelectionDialog"/>
+	<Button
+		id="try2"
+		text="try2"
+		press="openDepartureSelectionDialog"/>
+	<Button
+		id="try3"
+		text="try3"
+		press="openArrivalSelectionDialog"/>
+	<Button
+		id="try4"
+		text="try4"
+		press="openClientSelectionDialog"/>
+</mvc:View>
